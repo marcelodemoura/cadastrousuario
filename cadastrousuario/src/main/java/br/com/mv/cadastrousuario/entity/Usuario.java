@@ -1,20 +1,12 @@
 package br.com.mv.cadastrousuario.entity;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-
-import org.hibernate.validator.constraints.br.CPF;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -22,32 +14,21 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_usuario")
-public class Usuario {
+public class Usuario extends UsuarioAbstrato {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(length = 50, name = "Nome")
     private String nome;
-   
-
-    @Column(length=11, nullable = false)
+    @Column(length = 11, nullable = false)
     @CPF
     private String cpf;
-
-    private String endereco;
-
-    @Column (name = "email", length = 40, nullable = false)
-    @Email
+    @Column(name = "Email", length = 40)
     private String email;
-
-    @Column(nullable = false)
+    @Column(name = "Telefone", nullable = false, length = 20)
     private String telefone;
 
-    public void setDataCriacao(LocalDateTime now) {
-    }
-
-    
 
 }
